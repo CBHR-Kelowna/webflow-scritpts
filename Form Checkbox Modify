@@ -1,0 +1,40 @@
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Select the form by its ID
+  var form = document.getElementById('form');
+  
+  // Add an event listener for the form submission
+  form.addEventListener('submit', function(e) {
+    // Prevent the form from submitting immediately
+    e.preventDefault();
+    
+    // Target checkboxes by their specific name attributes or a class if they have one
+    var checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    
+    checkboxes.forEach(function(checkbox) {
+      if (checkbox.checked) {
+        // Use the 'data-name' attribute for the checkbox value if it's checked
+        checkbox.value = checkbox.getAttribute('data-name');
+      } else {
+        // If a checkbox is not checked, you might decide to not submit it, or submit with a value indicating it's not checked
+        // Here, we're choosing not to modify unchecked checkboxes. Adjust according to your needs.
+      }
+    });
+    
+    // Debug: Log the FormData to see what's being submitted. Remove this in production.
+    var formData = new FormData(form);
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
+    
+    // Submit the form
+    form.submit();
+  });
+});
+</script>
+
+
+
+
+
+//Set Webflow Checkbox Custom attribute to data-name="what name you want to send instead of on/off"
